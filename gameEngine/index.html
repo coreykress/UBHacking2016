@@ -1,8 +1,8 @@
 <!doctype html> 
 <html lang="en"> 
 <head> 
-    <meta charset="UTF-8" />
-    <title>Phaser - Making your first game, part 9</title>
+	<meta charset="UTF-8" />
+    <title>Inprogress Game</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
     <style type="text/css">
         body {
@@ -17,11 +17,11 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
-
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    game.load.image('surface', 'web/assets/background.png')
+    // game.load.image('sky', 'assets/sky.png');
+    game.load.image('ground', 'web/assets/platform.png');
+    game.load.image('star', 'web/assets/star.png');
+    game.load.spritesheet('dude', 'web/assets/dude.png', 32, 48);
 
 }
 
@@ -38,8 +38,9 @@ function create() {
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    surface = game.add.tileSprite(0, 0, 800, 600, 'surface');
     //  A simple background for our game
-    game.add.sprite(0, 0, 'sky');
+    // game.add.sprite(0, 0, 'sky');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -111,6 +112,7 @@ function update() {
     game.physics.arcade.collide(player, platforms);
     game.physics.arcade.collide(stars, platforms);
 
+
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
@@ -121,6 +123,7 @@ function update() {
     {
         //  Move to the left
         player.body.velocity.x = -150;
+        surface.tilePosition.x += 2;
 
         player.animations.play('left');
     }
@@ -128,6 +131,7 @@ function update() {
     {
         //  Move to the right
         player.body.velocity.x = 150;
+        surface.tilePosition.x -= 2;
 
         player.animations.play('right');
     }
