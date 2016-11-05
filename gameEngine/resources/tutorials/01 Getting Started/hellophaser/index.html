@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>hello phaser!</title>
+        <script src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js"></script>
+    </head>
+    <body>
+
+    <script type="text/javascript">
+
+    window.onload = function() {
+
+        //  Note that this html file is set to pull down Phaser 2.5.0 from the JS Delivr CDN.
+        //  Although it will work fine with this tutorial, it's almost certainly not the most current version.
+        //  Be sure to replace it with an updated version before you start experimenting with adding your own code.
+
+        var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create });
+
+        function preload () {
+
+            game.load.image('sky', 'assets/sky.png');
+            game.load.image('ground', 'assets/platform.png');
+            game.load.image('star', 'assets/star.png');
+            game.load.image('dude', 'assets/dude.png');
+
+        }
+
+        function create () {
+            game.add.sprite(0, 0, 'star');
+        }
+
+        function update () {
+
+        }
+
+    };
+
+    </script>
+
+    </body>
+</html>
